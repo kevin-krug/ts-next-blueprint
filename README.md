@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) blueprint project using [Typescript](https://github.com/microsoft/TypeScript), [Jest](https://github.com/facebook/jest) with [React's testing library](https://github.com/testing-library/react-testing-library) and [Storybook](https://github.com/storybookjs/storybook)
+A [Next.js](https://nextjs.org/) blueprint project using [Typescript](https://github.com/microsoft/TypeScript), [Jest](https://github.com/facebook/jest) with [React's testing library](https://github.com/testing-library/react-testing-library) and [Storybook](https://github.com/storybookjs/storybook)
 
 ## Setup
 
@@ -29,3 +29,7 @@ This is a [Next.js](https://nextjs.org/) blueprint project using [Typescript](ht
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 - [the Next.js GitHub repository](https://github.com/vercel/next.js/) - Next.js repo.
+- [Typescript Handbook](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
+- [Jest Documentation](https://jestjs.io/docs/next/getting-started)
+- [React Testing Library API Docs](https://testing-library.com/docs/react-testing-library/api/)
+- [Storybook](https://storybook.js.org/docs/react/writing-stories/introduction)
