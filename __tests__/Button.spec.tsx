@@ -1,6 +1,6 @@
 import React from 'react';
 import { cleanup, render } from '@testing-library/react';
-import { Button } from '../stories/Button';
+import { Button } from '../src/shared/components/button/Button';
 
 afterEach(cleanup);
 
