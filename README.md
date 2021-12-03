@@ -24,12 +24,16 @@ A [Next.js](https://nextjs.org/) blueprint project using [Typescript](https://gi
 
 `yarn run start` starts a Next.js production server
 
+## Code Example
+
+A basic button story `stories/Button.stories.tsx` and button test `__tests__/Button.spec.tsx` are included
+
 ## Docs
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [the Next.js GitHub repository](https://github.com/vercel/next.js/) - Next.js repo.
+- [Next.js API & Feature Documentation](https://nextjs.org/docs)
+- [interactive Next.js Tutorial](https://nextjs.org/learn)
+- [Next.js GitHub repo](https://github.com/vercel/next.js/)
 - [Typescript Handbook](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 - [Jest Documentation](https://jestjs.io/docs/next/getting-started)
 - [React Testing Library API Docs](https://testing-library.com/docs/react-testing-library/api/)
-- [Storybook](https://storybook.js.org/docs/react/writing-stories/introduction)
+- [Storybook Intro](https://storybook.js.org/docs/react/writing-stories/introduction)
