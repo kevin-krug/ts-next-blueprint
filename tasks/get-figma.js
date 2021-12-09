@@ -1,6 +1,16 @@
 
 import axios from 'axios';
+import fs from 'fs';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const figmaApiKey = process.argv[2];
+
+if (!figmaApiKey) {
+	console.log('* Please add add your figma API key: yarn run getfigma <YOURFIGMAAPIKEY>');
+    process.exit()
+}
 
 async function getFigmaObjTree(apiKey=figmaApiKey, figmaId ="Mi7wdQqRHavaPODG1EJ8pQ") {
     let res = await axios("https://api.figma.com/v1/files/" + figmaId, {
@@ -41,15 +51,25 @@ const getColors = (artboard) => {
     return colors;
 }
 
-<<<<<<< HEAD
-if (!figmaApiKey) {
-	console.log('* Please add add your figma API key: yarn run getfigma <YOURFIGMAAPIKEY>');
-} else {
-    console.log(getPageStyles(await getFigmaObjTree(), "Cover"))
-}
-
-=======
 const colors = getColors(coverArtboard)
 
-console.log(colors);
->>>>>>> 0233db9 (:wrench: adds getColors fct to get-figma task)
+const designToken = {
+    token: {
+        grids: {},
+        spacers: {},
+        colors,
+        fonts: {}
+    }
+};
+
+const buildDir = __dirname + "/../build";
+
+if (!fs.existsSync(buildDir)){
+    fs.mkdirSync(buildDir);
+}
+fs.writeFile(buildDir + "/design-token.json", JSON.stringify(designToken), 'utf8', (err) => {
+    if(err) {
+        return console.log(err);
+    }
+    console.log(`design-token.json saved to /build`);
+}); 
