@@ -62,7 +62,7 @@ const designToken = {
     }
 };
 
-const buildDir = __dirname + "/../build";
+const buildDir = __dirname + "/../tokens";
 
 if (!fs.existsSync(buildDir)){
     fs.mkdirSync(buildDir);
@@ -71,5 +71,5 @@ fs.writeFile(buildDir + "/design-token.json", JSON.stringify(designToken), 'utf8
     if(err) {
         return console.log(err);
     }
-    console.log(`design-token.json saved to /build`);
+    console.log(`design-token.json saved to /tokens`);
 }); 
