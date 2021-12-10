@@ -6,14 +6,15 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const figmaApiKey = process.argv[2];
+const figmaId = process.argv[3]
 
 if (!figmaApiKey) {
 	console.log('* Please add add your figma API key: yarn run getfigma <YOURFIGMAAPIKEY>');
     process.exit()
 }
 
-async function getFigmaObjTree(apiKey=figmaApiKey, figmaId ="Mi7wdQqRHavaPODG1EJ8pQ") {
-    let res = await axios("https://api.figma.com/v1/files/" + figmaId, {
+async function getFigmaObjTree(apiKey, fileId ="Mi7wdQqRHavaPODG1EJ8pQ") {
+    let res = await axios("https://api.figma.com/v1/files/" + fileId, {
         method: "GET",
         headers: {
             "X-Figma-Token": apiKey
@@ -29,7 +30,7 @@ const getArtboardStyles = (parentArtboard, artboardName) => parentArtboard.child
 
 const getPageStyles = (figmaObjTree, pageName) => getArtboardStyles(figmaObjTree.document, pageName);
 
-const coverArtboard = getPageStyles(await getFigmaObjTree(), "Cover")[0];
+const coverArtboard = getPageStyles(await getFigmaObjTree(figmaApiKey, figmaId), "Cover")[0];
 
 const getColors = (artboard) => {
     const paletteArtboard = getArtboardStyles(artboard, 'Palette');

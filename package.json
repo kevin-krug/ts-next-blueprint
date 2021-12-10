@@ -11,8 +11,8 @@
     "build-storybook": "build-storybook -s public",
     "test": "jest --watch",
     "test:ci": "jest --ci",
-    "getfigma": "node tasks/get-figma.js",
-    "generatecss": "node tasks/generate-css.js"
+    "getFigmaToken": "node tasks/get-figma-token.js",
+    "generateCss": "node tasks/generate-css.js"
   },
   "dependencies": {
     "axios": "^0.24.0",

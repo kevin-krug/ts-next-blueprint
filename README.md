@@ -24,6 +24,12 @@ A [Next.js](https://nextjs.org/) blueprint project using [Typescript](https://gi
 
 `yarn run start` starts a Next.js production server
 
+### Figma
+
+`yarn run getFigmaToken <apiKey> [<figmaId>]` generates a token (and saves it to /token) from the figma id of a figma style guide (defaults to acessing: https://www.figma.com/file/Mi7wdQqRHavaPODG1EJ8pQ) 
+
+`yarn run generateCss` generates css variables from the token
+
 ## Code Example
 
 A basic button story `stories/Button.stories.tsx` and button test `__tests__/Button.spec.tsx` are included
