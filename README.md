@@ -26,7 +26,7 @@ A [Next.js](https://nextjs.org/) blueprint project using [Typescript](https://gi
 
 ### Figma
 
-`yarn run getFigmaToken <apiKey> [<figmaId>]` generates a token (and saves it to /token) from the figma id of a figma style guide (defaults to acessing: https://www.figma.com/file/Mi7wdQqRHavaPODG1EJ8pQ) 
+`yarn run getFigmaToken <apiKey> [<figmaId>]` generates a token (and saves it to /token) from the figma id of a figma style guide (defaults to acessing: [figma file id: gh5MCGBOUZixklfZfLW4Fi](https://www.figma.com/file/gh5MCGBOUZixklfZfLW4Fi) 
 
 `yarn run generateCss` generates css variables from the token
 

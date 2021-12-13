@@ -20,15 +20,15 @@ const figmaApiKey = process.argv[2];
 const figmaId = process.argv[3]
 
 // todo: make configurable
-const STYLE_TOKEN_PAGE_NAME = 'Cover';
-const COLOR_TOKEN_LAYER_NAME = 'Palette';
+const DESIGN_TOKEN_PAGE_NAME = 'Design Tokens';
+const COLOR_TOKEN_FRAME_NAME = 'Colors';
 
 if (!figmaApiKey) {
 	console.log('* Please add add your figma API key: yarn run getfigma <YOURFIGMAAPIKEY>');
     process.exit()
 }
 
-const getFigmaFile = async(apiKey: string, fileId ="Mi7wdQqRHavaPODG1EJ8pQ") => {
+const getFigmaFile = async(apiKey: string, fileId ="gh5MCGBOUZixklfZfLW4Fi") => {
     let res = await axios("https://api.figma.com/v1/files/" + fileId, {
         method: "GET",
         headers: {
@@ -39,22 +39,20 @@ const getFigmaFile = async(apiKey: string, fileId ="Mi7wdQqRHavaPODG1EJ8pQ") => 
     return res.data;
 }
 
-const getChildNodeChildren = (parentNode: any, nodeName: string) => parentNode.children.filter((node: BaseNode) => {
-    return node.name === nodeName;
-})[0].children;
+const getChildNode = (parentNode: any, nodeName: string) => parentNode.children.filter((node: BaseNode) => node.name === nodeName)[0];
 
 const getColors = (pageNode: PageNode) => {
-    const paletteLayer = getChildNodeChildren(pageNode, COLOR_TOKEN_LAYER_NAME);
+    const colorsLayer = getChildNode(pageNode, COLOR_TOKEN_FRAME_NAME);
 
-    const colors = paletteLayer.reduce((acc: any, item: any) => {
-        const getRGBValue = (colorKey: string) => item.children[1].fills[0].color[colorKey] * 255;
+    const colors = colorsLayer.children.reduce((acc: any, item: any) => {
+        const getRGBValue = (colorKey: string) => item.fills[0].color[colorKey] * 255;
 
         return {
             ...acc,
             [item.name]: {
                 value: `rgba(${getRGBValue("r")}, ${getRGBValue("g")}, ${getRGBValue(
                     "b"
-                )}, ${item.children[1].fills[0].color.a})`,
+                )}, ${item.fills[0].color.a})`,
                 type: "color"
             }
         };
@@ -65,7 +63,7 @@ const getColors = (pageNode: PageNode) => {
 
 const figmaFile = await getFigmaFile(figmaApiKey, figmaId);
 const figmaDocument = figmaFile.document;
-const styleTokenPage = getChildNodeChildren( figmaDocument, STYLE_TOKEN_PAGE_NAME)[0];
+const styleTokenPage = getChildNode(figmaDocument, DESIGN_TOKEN_PAGE_NAME);
 const colors = getColors(styleTokenPage)
 
 const designToken = {
