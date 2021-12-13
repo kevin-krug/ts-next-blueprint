@@ -34,6 +34,23 @@ A [Next.js](https://nextjs.org/) blueprint project using [Typescript](https://gi
 
 A basic button story `stories/Button.stories.tsx` and button test `__tests__/Button.spec.tsx` are included
 
+## General Folder Structure
+
+```bash
+├── __tests__
+├── build
+├── public
+└── src
+    ├── pages
+        ├── api
+    ├── shared
+        ├── components
+        ├── styles
+├── stories
+├── tasks
+└── tokens
+```
+
 ## Docs
 
 - [Next.js API & Feature Documentation](https://nextjs.org/docs)
