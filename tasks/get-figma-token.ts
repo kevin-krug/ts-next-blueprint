@@ -4,16 +4,31 @@ import fs from 'fs';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
+/* Node type	Properties
+DOCUMENT	
+childrenNode[]
+An array of canvases attached to the document
+CANVAS	
+childrenNode[]
+An array of top level layers on the canvas */
+
+
+type ParentNode = DocumentNode | PageNode;
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const figmaApiKey = process.argv[2];
 const figmaId = process.argv[3]
+
+// todo: make configurable
+const STYLE_TOKEN_PAGE_NAME = 'Cover';
+const COLOR_TOKEN_LAYER_NAME = 'Palette';
 
 if (!figmaApiKey) {
 	console.log('* Please add add your figma API key: yarn run getfigma <YOURFIGMAAPIKEY>');
     process.exit()
 }
 
-async function getFigmaObjTree(apiKey, fileId ="Mi7wdQqRHavaPODG1EJ8pQ") {
+const getFigmaFile = async(apiKey: string, fileId ="Mi7wdQqRHavaPODG1EJ8pQ") => {
     let res = await axios("https://api.figma.com/v1/files/" + fileId, {
         method: "GET",
         headers: {
@@ -24,19 +39,15 @@ async function getFigmaObjTree(apiKey, fileId ="Mi7wdQqRHavaPODG1EJ8pQ") {
     return res.data;
 }
 
-const getArtboardStyles = (parentArtboard, artboardName) => parentArtboard.children.filter(item => {
-    return item.name === artboardName;
+const getChildNodeChildren = (parentNode: any, nodeName: string) => parentNode.children.filter((node: BaseNode) => {
+    return node.name === nodeName;
 })[0].children;
 
-const getPageStyles = (figmaObjTree, pageName) => getArtboardStyles(figmaObjTree.document, pageName);
+const getColors = (pageNode: PageNode) => {
+    const paletteLayer = getChildNodeChildren(pageNode, COLOR_TOKEN_LAYER_NAME);
 
-const coverArtboard = getPageStyles(await getFigmaObjTree(figmaApiKey, figmaId), "Cover")[0];
-
-const getColors = (artboard) => {
-    const paletteArtboard = getArtboardStyles(artboard, 'Palette');
-
-    const colors = paletteArtboard.reduce((acc, item) => {
-        const getRGBValue = (colorKey) => item.children[1].fills[0].color[colorKey] * 255;
+    const colors = paletteLayer.reduce((acc: any, item: any) => {
+        const getRGBValue = (colorKey: string) => item.children[1].fills[0].color[colorKey] * 255;
 
         return {
             ...acc,
@@ -52,7 +63,10 @@ const getColors = (artboard) => {
     return colors;
 }
 
-const colors = getColors(coverArtboard)
+const figmaFile = await getFigmaFile(figmaApiKey, figmaId);
+const figmaDocument = figmaFile.document;
+const styleTokenPage = getChildNodeChildren( figmaDocument, STYLE_TOKEN_PAGE_NAME)[0];
+const colors = getColors(styleTokenPage)
 
 const designToken = {
     token: {

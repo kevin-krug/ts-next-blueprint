@@ -11,7 +11,7 @@
     "build-storybook": "build-storybook -s public",
     "test": "jest --watch",
     "test:ci": "jest --ci",
-    "getFigmaToken": "node tasks/get-figma-token.js",
+    "getFigmaToken": "node --loader ts-node/esm tasks/get-figma-token.ts",
     "generateCss": "node tasks/generate-css.js"
   },
   "dependencies": {
