@@ -51,8 +51,13 @@ A basic button story `stories/Button.stories.tsx` and button test `__tests__/But
 └── tokens
 ```
 
+## Code Example
+
+A basic button story `stories/Button.stories.tsx` and button test `__tests__/Button.spec.tsx` are included
+
 ## Docs
 
+>>>>>>> 9a055830fd8c44a287a1174e60aca44b7ab187b2
 - [Next.js API & Feature Documentation](https://nextjs.org/docs)
 - [interactive Next.js Tutorial](https://nextjs.org/learn)
 - [Next.js GitHub repo](https://github.com/vercel/next.js/)
